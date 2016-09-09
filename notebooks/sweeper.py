@@ -43,6 +43,10 @@ def generateLegend(frame, sweeps):
         if key not in frame:
             s = s + key + '=not present, '
         else:
+            if type( frame[key][0] ) == type(u''):
+                
+                frame[key][0] = frame[key][0].split('/')[-1]
+                
             s = s + key + '=' + str(frame[key][0]) + ', '
     return s
 
