@@ -8,8 +8,11 @@ export learningRateDecayRatio=0.2
 export nesterov=true
 export randomcrop_type=reflection
 
+export dataset=${HOME}/PhD/Data/Public/CIFAR/100/cifar-100.proc.t7
+export save=${HOME}/PhD/Data/Public/CIFAR/100/Output/${model}_${RANDOM}${RANDOM}
+export batchSize=128
+
 # tee redirects stdout both to screen and to file
 # have to create folder for script and model beforehand
-export save=logs/${model}_${RANDOM}${RANDOM}
 mkdir -p $save
 th train.lua | tee $save/log.txt
