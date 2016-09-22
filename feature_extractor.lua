@@ -94,6 +94,9 @@ function main()
     -- get nn features for data, one minibatch at a time
     local fst,inputs,lst,nn_features,tmp = nil,nil,nil,nil,nil
 
+    -- set network in evaluation mode
+    net:evaluate()
+
     for i = 1,n_batches do
 
         -- get minibatch
