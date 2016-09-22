@@ -134,7 +134,7 @@ function main()
     end
 
     -- save features to file
-    Utils.savenpy(opt.out_path,nn_features)
+    npy4th.savenpy(opt.out_path,nn_features)
 end
 
 main()
