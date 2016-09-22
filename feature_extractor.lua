@@ -17,11 +17,12 @@ function get_options()
     cmd:option('-model_path','nil','path to saved model')
     cmd:option('-n_del',1,'number of layers to remove from the model')
     cmd:option('-out_path','nil','path to output')
+    cmd:option('-train_data','nil','path to training data (for mean and std)')
 
     opt = cmd:parse(arg)
 
     if opt.data_dir == 'nil' or opt.model_path == 'nil' or
-        opt.out_path == 'nil' then
+        opt.out_path == 'nil' or opt.train_data == 'nil' then
 
         error('Data, model and output paths are all required')
     end
@@ -90,6 +91,15 @@ function main()
     local data = Utils.data_to_th( npy4th.loadnpy( string.format(
         '%s/PreComp/Features/%s.npy',opt.data_dir,opt.inputs) ):double() )
     local n_batches = math.ceil( data:size(1) / opt.batch_size )
+
+    -- get mean and std from train data
+    local train_data = torch.load(opt.train_data)
+    local mean,std = train_data.trainData.mean,train_data.trainData.std
+    train_data = nil
+    collectgarbage()
+
+    -- normalize data
+    data:add(-mean):div(std)
 
     -- get nn features for data, one minibatch at a time
     local fst,inputs,lst,nn_features,tmp = nil,nil,nil,nil,nil
