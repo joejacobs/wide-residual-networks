@@ -134,7 +134,7 @@ function main()
     end
 
     -- save features to file
-    Utils.save_to_hdf5(opt.out_path,'/data',nn_features)
+    Utils.savenpy(opt.out_path,nn_features)
 end
 
 main()
