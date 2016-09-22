@@ -2,7 +2,7 @@ require 'math'
 require 'nn'
 local npy4th = require 'npy4th'
 require 'torch'
-local Utils = require 'Utils'
+local Utils = require '../CellClassification/Utils'
 
 function get_options()
 
